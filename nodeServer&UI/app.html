@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>LiveKit SIP Audio Receiver</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f0f4ff, #dfe9f3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+      margin: 0;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      margin: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      color: #fff;
+    }
+
+    #joinBtn {
+      background-color: #3498db;
+    }
+
+    #joinBtn:hover {
+      background-color: #2980b9;
+      transform: scale(1.05);
+    }
+
+    #dialBtn {
+      background-color: #27ae60;
+    }
+
+    #dialBtn:hover {
+      background-color: #219150;
+      transform: scale(1.05);
+    }
+
+    #phoneInputContainer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      width: 200px;
+    }
+
+    footer {
+      margin-top: auto;
+      font-size: 12px;
+      color: #7f8c8d;
+    }
+    #roomList {
+      margin-top: 20px;
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>📞 LiveKit SIP Audio Receiver</h1>
+  <div>   <button class="btn" id="joinBtn">🎤 Join Room</button>
+    <button class="btn" id="disconnectBtn" style="background-color: #e74c3c;"> Disconnect Room</button>
+  </div>
+
+  <div id="phoneInputContainer">
+    <input type="text" id="phoneNumber" placeholder="Enter phone number" value="+9713339">
+    <button class="btn" id="dialBtn">📲 Dial Number</button>
+  </div>
+
+  <div id="roomList">
+    <h3>Participants in Room:</h3>
+    <ul id="participantList"></ul>
+  </div>
+  
+
+
+  <footer>
+    Powered by LiveKit + Genesys
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html> 

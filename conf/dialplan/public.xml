@@ -1,0 +1,29 @@
+<include>
+  <context name="public">
+
+         <extension name="debug_all_calls" continue="true">
+        <condition field="destination_number" expression=".*">
+          <action application="log" data="DEBUG: Received call to ${destination_number}"/>
+        </condition>
+      </extension>
+
+    <extension name="bridge_to_genesys">
+      <condition field="destination_number" expression="^\+971\d{1,15}$">
+        <action application="set" data="sip_secure_media=true"/>
+        <action application="set" data="media_secure=optional"/>
+        <action application="bridge" data="sofia/gateway/genesys/${destination_number}"/>
+      </condition>
+    </extension>
+    
+     <extension name="anonymous-inbound">
+  <condition field="destination_number" expression="^.*$">
+    <action application="set" data="sip_h_X-Genesys-Call-Type=external"/>
+    <action application="set" data="sip_secure_media=true"/>
+    <action application="set" data="media_secure=optional"/>
+    <action application="bridge" data="sofia/gateway/genesys/${destination_number}"/>
+
+  </condition>
+</extension>
+  </context>
+</include>
+

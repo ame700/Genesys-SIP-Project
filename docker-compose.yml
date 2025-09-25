@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+      
+  livekit:
+    image: livekit/livekit-server
+    network_mode: host
+    volumes:
+      - ./livekit.yaml:/livekit.yaml
+    command: ["--config", "/livekit.yaml" , "--dev", "--redis-host" ,"localhost:6379"]
+    depends_on:
+        redis:
+            condition: service_started
+  sip-gateway:
+    image: livekit-sip-insecure
+    network_mode: host
+    depends_on:
+      - livekit
+      - redis
+    volumes:
+      - ./sip-config.yaml:/sip/config.yaml
+  freeswitch:
+    image: safarov/freeswitch:latest
+    network_mode: host
+    restart: always
+    volumes:
+      - ./conf:/etc/freeswitch
+
+volumes:
+  redis_data:
